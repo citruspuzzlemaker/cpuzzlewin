@@ -19,11 +19,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          clean: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Debug repository content
+        run: ls -R .
+
+      - name: Debug Node script
+        run: node scripts/generate-gallery.js || true
 
       - name: Generate gallery.json
         run: |
