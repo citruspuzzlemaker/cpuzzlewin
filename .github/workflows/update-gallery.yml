@@ -34,8 +34,10 @@ jobs:
 
       - name: Generate gallery.json
         run: |
-          mkdir -p public
-          node scripts/generate-gallery.js
+         mkdir -p public
+          GIT_SHA=$(git rev-parse HEAD)
+             node scripts/generate-gallery.js "$GIT_SHA"
+
 
       - name: Commit and push changes
         run: |
