@@ -26,6 +26,4 @@ fs.writeFileSync(outputFile, JSON.stringify(urls, null, 2));
 console.log(`gallery.json generato con ${files.length} immagini (sha: ${gitSha})`);
 
 
-fs.writeFileSync(outputFile, JSON.stringify(urls, null, 2));
 
-console.log(`✅ gallery.json generato con ${files.length} immagini`);
