@@ -1,9 +1,7 @@
-name: Update gallery.json
+name: Generate Gallery JSON
 
 on:
   push:
-    branches:
-      - main
     paths:
       - "images/**"
 
@@ -15,25 +13,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: 18
 
       - name: Generate gallery.json
         run: |
           mkdir -p public
-          node scripts/generate-gallery.js
+          node scripts/generate-json.js
 
       - name: Commit and push changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
           git add public/gallery.json
-          git commit -m "Update gallery.json [skip ci]" || echo "No changes to commit"
+          git commit -m "Update gallery.json" || echo "No changes"
           git push
